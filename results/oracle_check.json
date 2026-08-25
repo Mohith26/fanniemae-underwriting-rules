@@ -1,0 +1,7 @@
+{
+  "applications": 500000,
+  "seed": 1337,
+  "mismatches": 0,
+  "mismatch_examples": [],
+  "elapsed_seconds": 5.609
+}

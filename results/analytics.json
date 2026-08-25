@@ -1,0 +1,101 @@
+{
+  "applications": 500000,
+  "seed": 1337,
+  "approved": 103551,
+  "overall_approval_rate": 0.2071,
+  "approval_by_segment": {
+    "occupancy": {
+      "investment": {
+        "applications": 99713,
+        "approved": 16093,
+        "approval_rate": 0.1614
+      },
+      "primary": {
+        "applications": 350358,
+        "approved": 77302,
+        "approval_rate": 0.2206
+      },
+      "second_home": {
+        "applications": 49929,
+        "approved": 10156,
+        "approval_rate": 0.2034
+      }
+    },
+    "units": {
+      "1": {
+        "applications": 410200,
+        "approved": 86177,
+        "approval_rate": 0.2101
+      },
+      "2": {
+        "applications": 44878,
+        "approved": 8304,
+        "approval_rate": 0.185
+      },
+      "3": {
+        "applications": 22451,
+        "approved": 4340,
+        "approval_rate": 0.1933
+      },
+      "4": {
+        "applications": 22471,
+        "approved": 4730,
+        "approval_rate": 0.2105
+      }
+    },
+    "credit_band": {
+      "620_659": {
+        "applications": 84770,
+        "approved": 18497,
+        "approval_rate": 0.2182
+      },
+      "660_719": {
+        "applications": 118056,
+        "approved": 31163,
+        "approval_rate": 0.264
+      },
+      "720_plus": {
+        "applications": 189662,
+        "approved": 53891,
+        "approval_rate": 0.2841
+      },
+      "under_620": {
+        "applications": 107512,
+        "approved": 0,
+        "approval_rate": 0.0
+      }
+    },
+    "dti_band": {
+      "36_45": {
+        "applications": 95050,
+        "approved": 27018,
+        "approval_rate": 0.2843
+      },
+      "45_50": {
+        "applications": 63170,
+        "approved": 14933,
+        "approval_rate": 0.2364
+      },
+      "le_36": {
+        "applications": 213639,
+        "approved": 61600,
+        "approval_rate": 0.2883
+      },
+      "over_50": {
+        "applications": 128141,
+        "approved": 0,
+        "approval_rate": 0.0
+      }
+    }
+  },
+  "reason_code_frequency": {
+    "LIM01": 238318,
+    "DTI01": 128141,
+    "LTV01": 116565,
+    "CRD01": 107512,
+    "CRD02": 89675,
+    "RSV01": 54342,
+    "DTI03": 28128,
+    "DTI02": 8390
+  }
+}

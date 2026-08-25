@@ -1,0 +1,45 @@
+{
+  "golden_cases": 12,
+  "baseline_failures": [],
+  "rules": {
+    "loan_limit": {
+      "flipped_cases": [
+        "refer_loan_limit_only"
+      ],
+      "live": true
+    },
+    "ltv_cap": {
+      "flipped_cases": [
+        "refer_ltv_only"
+      ],
+      "live": true
+    },
+    "credit_floor": {
+      "flipped_cases": [
+        "refer_credit_floor_only"
+      ],
+      "live": true
+    },
+    "credit_tier": {
+      "flipped_cases": [
+        "refer_credit_tier_only"
+      ],
+      "live": true
+    },
+    "dti": {
+      "flipped_cases": [
+        "refer_dti_hard_cap_only",
+        "refer_dti_flex_no_factors_only",
+        "refer_dti_stretch_one_factor_only"
+      ],
+      "live": true
+    },
+    "reserves": {
+      "flipped_cases": [
+        "refer_reserves_only"
+      ],
+      "live": true
+    }
+  },
+  "all_rules_live": true
+}
