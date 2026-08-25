@@ -1,0 +1,77 @@
+{
+  "notes": "Hand built applications pinned to known decisions. Single fire cases isolate exactly one rule so the mutation harness can prove each rule is live. Amounts are integer cents.",
+  "cases": [
+    {
+      "name": "approve_interior",
+      "expected_decision": "approve",
+      "expected_codes": [],
+      "app": {"loan_amount_cents": 30000000, "property_value_cents": 40000000, "monthly_income_cents": 1000000, "monthly_debt_cents": 300000, "monthly_housing_cents": 200000, "reserves_cents": 2400000, "credit_score": 740, "occupancy": "primary", "property_type": "single_family", "units": 1}
+    },
+    {
+      "name": "approve_all_boundaries",
+      "expected_decision": "approve",
+      "expected_codes": [],
+      "app": {"loan_amount_cents": 38800000, "property_value_cents": 40000000, "monthly_income_cents": 1000000, "monthly_debt_cents": 360000, "monthly_housing_cents": 200000, "reserves_cents": 0, "credit_score": 660, "occupancy": "primary", "property_type": "single_family", "units": 1}
+    },
+    {
+      "name": "approve_second_home_boundaries",
+      "expected_decision": "approve",
+      "expected_codes": [],
+      "app": {"loan_amount_cents": 36000000, "property_value_cents": 40000000, "monthly_income_cents": 1000000, "monthly_debt_cents": 450000, "monthly_housing_cents": 200000, "reserves_cents": 400000, "credit_score": 720, "occupancy": "second_home", "property_type": "single_family", "units": 1}
+    },
+    {
+      "name": "refer_loan_limit_only",
+      "expected_decision": "refer",
+      "expected_codes": ["LIM01"],
+      "app": {"loan_amount_cents": 80000001, "property_value_cents": 250000000, "monthly_income_cents": 3000000, "monthly_debt_cents": 900000, "monthly_housing_cents": 200000, "reserves_cents": 2400000, "credit_score": 740, "occupancy": "primary", "property_type": "single_family", "units": 1}
+    },
+    {
+      "name": "refer_ltv_only",
+      "expected_decision": "refer",
+      "expected_codes": ["LTV01"],
+      "app": {"loan_amount_cents": 38800001, "property_value_cents": 40000000, "monthly_income_cents": 1000000, "monthly_debt_cents": 300000, "monthly_housing_cents": 200000, "reserves_cents": 2400000, "credit_score": 740, "occupancy": "primary", "property_type": "single_family", "units": 1}
+    },
+    {
+      "name": "refer_credit_floor_only",
+      "expected_decision": "refer",
+      "expected_codes": ["CRD01"],
+      "app": {"loan_amount_cents": 30000000, "property_value_cents": 40000000, "monthly_income_cents": 1000000, "monthly_debt_cents": 300000, "monthly_housing_cents": 200000, "reserves_cents": 2400000, "credit_score": 619, "occupancy": "primary", "property_type": "single_family", "units": 1}
+    },
+    {
+      "name": "refer_credit_tier_only",
+      "expected_decision": "refer",
+      "expected_codes": ["CRD02"],
+      "app": {"loan_amount_cents": 30400000, "property_value_cents": 40000000, "monthly_income_cents": 1000000, "monthly_debt_cents": 300000, "monthly_housing_cents": 200000, "reserves_cents": 2400000, "credit_score": 640, "occupancy": "primary", "property_type": "single_family", "units": 1}
+    },
+    {
+      "name": "refer_dti_hard_cap_only",
+      "expected_decision": "refer",
+      "expected_codes": ["DTI01"],
+      "app": {"loan_amount_cents": 30000000, "property_value_cents": 40000000, "monthly_income_cents": 1000000, "monthly_debt_cents": 500001, "monthly_housing_cents": 200000, "reserves_cents": 2400000, "credit_score": 740, "occupancy": "primary", "property_type": "single_family", "units": 1}
+    },
+    {
+      "name": "refer_dti_flex_no_factors_only",
+      "expected_decision": "refer",
+      "expected_codes": ["DTI02"],
+      "app": {"loan_amount_cents": 30400000, "property_value_cents": 40000000, "monthly_income_cents": 1000000, "monthly_debt_cents": 400000, "monthly_housing_cents": 200000, "reserves_cents": 1000000, "credit_score": 700, "occupancy": "primary", "property_type": "single_family", "units": 1}
+    },
+    {
+      "name": "refer_dti_stretch_one_factor_only",
+      "expected_decision": "refer",
+      "expected_codes": ["DTI03"],
+      "app": {"loan_amount_cents": 30400000, "property_value_cents": 40000000, "monthly_income_cents": 1000000, "monthly_debt_cents": 470000, "monthly_housing_cents": 200000, "reserves_cents": 1000000, "credit_score": 720, "occupancy": "primary", "property_type": "single_family", "units": 1}
+    },
+    {
+      "name": "refer_reserves_only",
+      "expected_decision": "refer",
+      "expected_codes": ["RSV01"],
+      "app": {"loan_amount_cents": 30000000, "property_value_cents": 40000000, "monthly_income_cents": 1000000, "monthly_debt_cents": 300000, "monthly_housing_cents": 200000, "reserves_cents": 1199999, "credit_score": 740, "occupancy": "primary", "property_type": "single_family", "units": 2}
+    },
+    {
+      "name": "refer_everything_fires",
+      "expected_decision": "refer",
+      "expected_codes": ["CRD01", "CRD02", "DTI01", "LIM01", "LTV01", "RSV01"],
+      "app": {"loan_amount_cents": 80000001, "property_value_cents": 40000000, "monthly_income_cents": 1000000, "monthly_debt_cents": 510000, "monthly_housing_cents": 200000, "reserves_cents": 0, "credit_score": 619, "occupancy": "investment", "property_type": "single_family", "units": 1}
+    }
+  ]
+}
