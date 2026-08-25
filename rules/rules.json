@@ -1,0 +1,72 @@
+{
+  "version": "1.0",
+  "notes": "Illustrative eligibility rule set for synthetic loan applications. These thresholds are invented for this project and are not the guidelines of any agency or investor. All ratios are basis points (1 percent = 100 bps). All money amounts are integer cents. Ratio comparisons are exact integer cross multiplications, never floats. Boundary semantics: a ratio exactly equal to its cap PASSES, a score exactly equal to its floor PASSES, reserves exactly equal to the requirement PASS, a loan amount exactly equal to the limit PASSES.",
+  "evaluation_order": [
+    "loan_limit",
+    "ltv_cap",
+    "credit_floor",
+    "credit_tier",
+    "dti",
+    "reserves"
+  ],
+  "rules": {
+    "loan_limit": {
+      "reason_code": "LIM01",
+      "description": "Loan amount must not exceed the limit for the unit count. Fires when loan_amount_cents > limit_cents[units].",
+      "limits_cents": {
+        "1": 80000000,
+        "2": 102400000,
+        "3": 123800000,
+        "4": 153800000
+      }
+    },
+    "ltv_cap": {
+      "reason_code": "LTV01",
+      "description": "Loan to value must not exceed the cap for occupancy and unit count. The effective cap is the minimum of the occupancy/units cap and any property type override. Fires when loan_amount_cents * 10000 > cap_bps * property_value_cents.",
+      "caps_bps": {
+        "primary": {"1": 9700, "2": 8500, "3": 7500, "4": 7500},
+        "second_home": {"1": 9000},
+        "investment": {"1": 8500, "2": 7500, "3": 7500, "4": 7500}
+      },
+      "property_type_overrides_bps": {
+        "manufactured": 9500
+      }
+    },
+    "credit_floor": {
+      "reason_code": "CRD01",
+      "description": "Representative credit score must be at least the floor. Fires when credit_score < min_score.",
+      "min_score": 620
+    },
+    "credit_tier": {
+      "reason_code": "CRD02",
+      "description": "Scores below the tier threshold are only eligible at or below the tier LTV cap. Fires when credit_score < tier_score and LTV exceeds tier_max_ltv_bps.",
+      "tier_score": 660,
+      "tier_max_ltv_bps": 7500
+    },
+    "dti": {
+      "description": "Debt to income layering with compensating factors. DTI at or below base_max_bps always passes. DTI in (base_max_bps, flex_max_bps] needs at least flex_required_factors compensating factors, otherwise DTI02 fires. DTI in (flex_max_bps, hard_cap_bps] needs at least hard_required_factors, otherwise DTI03 fires. DTI above hard_cap_bps always fires DTI01 regardless of factors.",
+      "base_max_bps": 3600,
+      "flex_max_bps": 4500,
+      "hard_cap_bps": 5000,
+      "flex_required_factors": 1,
+      "hard_required_factors": 2,
+      "reason_code_hard": "DTI01",
+      "reason_code_flex": "DTI02",
+      "reason_code_stretch": "DTI03",
+      "compensating_factors": {
+        "high_credit": {"min_score": 720},
+        "strong_reserves": {"min_months_housing": 6},
+        "low_ltv": {"max_ltv_bps": 7500}
+      }
+    },
+    "reserves": {
+      "reason_code": "RSV01",
+      "description": "Liquid reserves must cover the required number of months of the monthly housing payment. Fires when reserves_cents < required_months * monthly_housing_cents.",
+      "required_months": {
+        "primary": {"1": 0, "2": 6, "3": 6, "4": 6},
+        "second_home": {"1": 2},
+        "investment": {"1": 6, "2": 6, "3": 6, "4": 6}
+      }
+    }
+  }
+}
